@@ -1,0 +1,39 @@
+.orange {
+    background-color: #FF671F;
+    height: 200px;
+    width: 700px;
+    margin-left: 350px;
+    margin-top: 100px;
+}
+
+.white {
+    background-color: #FFFFFF;
+    height: 230px;
+    width: 700px;
+    margin-left: 350px;
+}
+
+.green {
+    background-color: #046A38;
+    height: 200px;
+    width: 700px;
+    margin-left: 350px;
+    margin-bottom: 100px;
+}
+
+.blue {
+    margin-left: 230px;
+}
+
+#curve {
+    border: 10mm ridge black;
+}
+
+a {
+    margin-left: 1100px;
+    color: black;
+}
+
+.mom {
+    margin-left: 300px;
+}
