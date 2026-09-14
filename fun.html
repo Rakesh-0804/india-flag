@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flag Heritage, History & Trivia Quiz | Tiranga Portal</title>
+    <meta name="description" content="Learn about the designer Pingali Venkayya, history of the Indian Tricolor, official flag code protocols, and test your knowledge with the Tiranga Trivia Quiz.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="assets/ashoka_chakra.svg">
+</head>
+
+<body>
+    <!-- Navbar Navigation -->
+    <header>
+        <nav class="navbar" aria-label="Main Navigation">
+            <div class="nav-brand">
+                <img src="assets/ashoka_chakra.svg" alt="Ashoka Chakra Logo">
+                <span>Tiranga Portal</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home & Flag</a></li>
+                <li><a href="index.html#colors" class="nav-link">Specifications</a></li>
+                <li><a href="index.html#spokes" class="nav-link">24 Spokes</a></li>
+                <li><a href="fun.html" class="nav-link active">Heritage & Quiz</a></li>
+                <li>
+                    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Dark/Light Mode">
+                        <span id="theme-icon">🌙</span> Theme
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="hero-title">Heritage, History & Trivia</h1>
+            <p class="hero-subtitle">Discover the rich history behind the creation of the Indian National Flag and challenge your knowledge with our interactive quiz.</p>
+        </section>
+
+        <!-- History Highlights Grid -->
+        <section class="history-grid">
+            <div class="history-card">
+                <h3>Designed by Pingali Venkayya</h3>
+                <p>Freedom fighter and agriculturist Pingali Venkayya designed the original flag in Vijayawada. Originally featuring red and green bands, Mahatma Gandhi later suggested adding a white band and the spinning wheel (Charkha) in the center.</p>
+            </div>
+
+            <div class="history-card">
+                <h3>Adopted on 22 July 1947</h3>
+                <p>The Constituent Assembly adopted the tricolor in its present form on July 22, 1947, just 24 days before India gained Independence. The spinning wheel was replaced by the Ashoka Chakra from the Lion Capital of Ashoka at Sarnath.</p>
+            </div>
+
+            <div class="history-card">
+                <h3>Official Flag Code Proportions</h3>
+                <p>The ratio of the length of the flag to its height is strictly <strong>3:2</strong>. All three horizontal bands must be of equal size, with the Ashoka Chakra centered in the white band featuring 24 evenly spaced spokes.</p>
+            </div>
+        </section>
+
+        <!-- Interactive Quiz Section -->
+        <section class="quiz-section">
+            <h2 class="section-title" style="text-align: center;">Tiranga National Knowledge Quiz</h2>
+            <p class="section-desc" style="text-align: center;">Test your awareness of the National Flag of India!</p>
+
+            <div id="quiz-container">
+                <!-- Dynamically rendered via script.js -->
+            </div>
+
+            <div id="quiz-result" style="display: none;">
+                <!-- Result summary card -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 National Flag of India Portal. Designed with honor and pride. | <a href="index.html">Back to Home</a></p>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>National Flag of India | Tiranga Interactive Showcase</title>
+    <meta name="description" content="Explore the National Flag of India (Tiranga). Proportions, color specs, history of Ashoka Chakra, and interactive 24 spokes explorer.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="assets/ashoka_chakra.svg">
+</head>
+
+<body>
+    <!-- Navbar Navigation -->
+    <header>
+        <nav class="navbar" aria-label="Main Navigation">
+            <div class="nav-brand">
+                <img src="assets/ashoka_chakra.svg" alt="Ashoka Chakra Logo">
+                <span>Tiranga Portal</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link active">Home & Flag</a></li>
+                <li><a href="#colors" class="nav-link">Specifications</a></li>
+                <li><a href="#spokes" class="nav-link">24 Spokes</a></li>
+                <li><a href="fun.html" class="nav-link">Heritage & Quiz</a></li>
+                <li>
+                    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Dark/Light Mode">
+                        <span id="theme-icon">🌙</span> Theme
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content Container -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="hero-title">The National Flag of India</h1>
+            <p class="hero-subtitle">Symbol of pride, courage, peace, and eternal progress. Explore the official specifications, colors, and 24 principles of Dharma.</p>
+            
+            <div class="flag-stage">
+                <!-- 3:2 Ratio Aspect Flag Container -->
+                <div id="flag-container" class="flag-wrapper" role="img" aria-label="National Flag of India - Saffron, White, and Green tricolor with Ashoka Chakra">
+                    <div class="flag-band band-saffron"></div>
+                    <div class="flag-band band-white">
+                        <img class="chakra-svg" src="assets/ashoka_chakra.svg" alt="Navy Blue 24-spoked Ashoka Chakra">
+                    </div>
+                    <div class="flag-band band-green"></div>
+                </div>
+
+                <div class="flag-controls">
+                    <button id="wave-toggle" class="btn btn-primary" aria-pressed="false">
+                        <span class="icon">🌊</span> Toggle Flag Wave
+                    </button>
+                    <a href="assets/ashoka_chakra.svg" download="ashoka_chakra.svg" class="btn btn-secondary">
+                        <span class="icon">📥</span> Download Chakra SVG
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Official Specifications & Colors Section -->
+        <section id="colors" class="colors-section">
+            <h2 class="section-title">Official Color Palette & Specifications</h2>
+            <p class="section-desc">Click any color card below to copy its HEX code directly to your clipboard.</p>
+
+            <div class="colors-grid">
+                <div class="color-card" data-color="#FF9933" role="button" tabindex="0">
+                    <div class="color-swatch" style="background-color: #FF9933;">
+                        <span class="copy-badge">Click to Copy</span>
+                    </div>
+                    <div class="color-info">
+                        <h3>India Saffron</h3>
+                        <div class="color-hex">#FF9933</div>
+                        <p class="color-meaning">Symbolizes strength, courage, and sacrifice for the nation.</p>
+                    </div>
+                </div>
+
+                <div class="color-card" data-color="#FFFFFF" role="button" tabindex="0">
+                    <div class="color-swatch" style="background-color: #FFFFFF; border-bottom: 1px solid var(--bg-card-border);">
+                        <span class="copy-badge" style="background: rgba(0,0,0,0.6);">Click to Copy</span>
+                    </div>
+                    <div class="color-info">
+                        <h3>White</h3>
+                        <div class="color-hex">#FFFFFF</div>
+                        <p class="color-meaning">Represents peace, truth, purity, and honesty.</p>
+                    </div>
+                </div>
+
+                <div class="color-card" data-color="#138808" role="button" tabindex="0">
+                    <div class="color-swatch" style="background-color: #138808;">
+                        <span class="copy-badge">Click to Copy</span>
+                    </div>
+                    <div class="color-info">
+                        <h3>India Green</h3>
+                        <div class="color-hex">#138808</div>
+                        <p class="color-meaning">Signifies faith, fertility, prosperity, and chivalry.</p>
+                    </div>
+                </div>
+
+                <div class="color-card" data-color="#000080" role="button" tabindex="0">
+                    <div class="color-swatch" style="background-color: #000080;">
+                        <span class="copy-badge">Click to Copy</span>
+                    </div>
+                    <div class="color-info">
+                        <h3>Navy Blue</h3>
+                        <div class="color-hex">#000080</div>
+                        <p class="color-meaning">Represents the sky and ocean, depicting the eternal truths of the universe.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 24 Spokes Virtue Explorer -->
+        <section id="spokes" class="spokes-section">
+            <h2 class="section-title">The 24 Spokes of Ashoka Chakra</h2>
+            <p class="section-desc">The Ashoka Chakra depicts the Wheel of Dharma (Law). Each of the 24 spokes stands for a life principle and eternal progress.</p>
+
+            <div class="spokes-layout">
+                <div id="spokes-grid" class="spokes-grid" role="listbox" aria-label="24 Spokes Explorer Grid">
+                    <!-- Dynamic chips inserted via script.js -->
+                </div>
+                <div class="spoke-details-panel">
+                    <div id="spoke-details" class="spoke-details">
+                        <!-- Active Spoke Details Card -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 National Flag of India Portal. Designed with honor and pride. | <a href="fun.html">Trivia & History</a></p>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script src="script.js"></script>
+</body>
+
+</html>
