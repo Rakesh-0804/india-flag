@@ -11,6 +11,8 @@ An interactive, responsive, and modern web application dedicated to the **Nation
 
 ## ✨ Features
 
+- 🚩 **Flag Hoisting Ceremony**: Interactive flag hoisting experience complete with a metallic flagpole, rising flag animation, National Anthem playback, and celebratory falling marigold & rose flower petal particles.
+- 📜 **Flag Code Protocols Modal**: Quick reference guide on display rules, Flag Code of India 2002 amendments, and dignified disposal protocols.
 - 🇮🇳 **Official Flag Proportions**: Rendered with exact 3:2 width-to-height aspect ratio and equal horizontal tricolor bands.
 - 🎨 **Official Color Specifications**:
   - **India Saffron (`#FF9933`)**: Courage, strength, and sacrifice.
@@ -36,10 +38,10 @@ india-flag-main/
 │   ├── ashoka_chakra.svg   # Vector graphic of the 24-spoke Ashoka Chakra
 │   ├── chakara.jpeg        # Original image asset
 │   └── comdey.webp         # Heritage media asset
-├── index.html              # Main Flag Portal, Anthem Player & Specifications Page
+├── index.html              # Main Flag Portal, Anthem Player, Flag Hoisting & Flag Code Modal
 ├── fun.html                # Heritage, History & National Knowledge Quiz Page
-├── style.css               # Modern responsive CSS design system, audio card & animations
-├── script.js               # Theme, waving flag, PNG export, Anthem synthesizer & quiz logic
+├── style.css               # Modern responsive CSS design system, flagpole & modal styles
+├── script.js               # Theme, flag hoisting, flower petals, PNG export, Anthem & quiz logic
 ├── .gitignore              # Git ignore rules
 └── README.md               # Documentation
 ```

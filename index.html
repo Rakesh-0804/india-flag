@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>National Flag of India | Tiranga Interactive Showcase</title>
-    <meta name="description" content="Explore the National Flag of India (Tiranga). Proportions, color specs, history of Ashoka Chakra, National Anthem audio player, PNG exporter, and 24 spokes explorer.">
+    <meta name="description" content="Explore the National Flag of India (Tiranga). Flag hoisting ceremony, proportions, color specs, Flag Code guidelines, audio player, PNG exporter, and 24 spokes explorer.">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg+xml" href="assets/ashoka_chakra.svg">
 </head>
@@ -23,6 +23,7 @@
                 <li><a href="#anthem-section" class="nav-link">Anthem Player</a></li>
                 <li><a href="#colors" class="nav-link">Specifications</a></li>
                 <li><a href="#spokes" class="nav-link">24 Spokes</a></li>
+                <li><button id="flagcode-open-btn" class="nav-link btn-link">Flag Code</button></li>
                 <li><a href="fun.html" class="nav-link">Heritage & Quiz</a></li>
                 <li>
                     <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Dark/Light Mode">
@@ -67,17 +68,28 @@
             </div>
             
             <div class="flag-stage">
-                <!-- 3:2 Ratio Aspect Flag Container -->
-                <div id="flag-container" class="flag-wrapper" role="img" aria-label="National Flag of India - Saffron, White, and Green tricolor with Ashoka Chakra">
-                    <div class="flag-band band-saffron"></div>
-                    <div class="flag-band band-white">
-                        <img class="chakra-svg" src="assets/ashoka_chakra.svg" alt="Navy Blue 24-spoked Ashoka Chakra">
+                <!-- Flagpole & Flag Container -->
+                <div id="flagpole-wrapper" class="flagpole-wrapper">
+                    <div class="flagpole">
+                        <div class="flagpole-finial"></div>
+                        <div class="flagpole-pole"></div>
+                        <div class="flagpole-base"></div>
                     </div>
-                    <div class="flag-band band-green"></div>
+                    <!-- 3:2 Ratio Aspect Flag Container -->
+                    <div id="flag-container" class="flag-wrapper" role="img" aria-label="National Flag of India - Saffron, White, and Green tricolor with Ashoka Chakra">
+                        <div class="flag-band band-saffron"></div>
+                        <div class="flag-band band-white">
+                            <img class="chakra-svg" src="assets/ashoka_chakra.svg" alt="Navy Blue 24-spoked Ashoka Chakra">
+                        </div>
+                        <div class="flag-band band-green"></div>
+                    </div>
                 </div>
 
                 <div class="flag-controls">
-                    <button id="wave-toggle" class="btn btn-primary" aria-pressed="false">
+                    <button id="hoist-btn" class="btn btn-primary">
+                        <span class="icon">🚩</span> Hoist Flag Ceremony
+                    </button>
+                    <button id="wave-toggle" class="btn btn-secondary" aria-pressed="false">
                         <span class="icon">🌊</span> Toggle Flag Wave
                     </button>
                     <button id="export-png-btn" class="btn btn-accent">
@@ -159,6 +171,33 @@
             </div>
         </section>
     </main>
+
+    <!-- Flag Code Guidelines Modal -->
+    <div id="flagcode-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>Flag Code of India Guidelines 🇮🇳</h2>
+                <button id="flagcode-close-btn" class="modal-close-btn" aria-label="Close Modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="protocol-card">
+                    <h3>1. Display & Position of Honor</h3>
+                    <p>The Flag must always be flown with the Saffron band on top. When displayed horizontally or at an angle, Saffron should be at the top. When placed on a stage or podium, it must be to the right of the speaker.</p>
+                </div>
+                <div class="protocol-card">
+                    <h3>2. Flag Code 2002 Amendment</h3>
+                    <p>As per the amended Flag Code of India 2002, member of the general public, private organizations, and educational institutions are allowed to hoist the National Flag on all days, day and night, with dignity and respect.</p>
+                </div>
+                <div class="protocol-card">
+                    <h3>3. Dignified Disposal Protocol</h3>
+                    <p>When the Flag is damaged or discolored, it must not be discarded casually. It should be destroyed as a whole in private, preferably by burning or burial, in a manner consistent with its dignity.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Petal Particles Canvas Container -->
+    <div id="petals-container" class="petals-container"></div>
 
     <!-- Footer -->
     <footer>

@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initCopyColor();
     initWaveToggle();
+    initHoistCeremony();
+    initFlagCodeModal();
     initPNGExport();
     initAnthemPlayer();
     initSpokesExplorer();
@@ -83,7 +85,84 @@ function initWaveToggle() {
     });
 }
 
-// Feature 1: High-Resolution PNG Flag Exporter
+// Feature 1: Interactive Flag Hoisting Ceremony & Celebratory Flower Petals
+function initHoistCeremony() {
+    const hoistBtn = document.getElementById('hoist-btn');
+    const flagpoleWrapper = document.getElementById('flagpole-wrapper');
+    const flagContainer = document.getElementById('flag-container');
+    if (!hoistBtn || !flagpoleWrapper) return;
+
+    hoistBtn.addEventListener('click', () => {
+        // Trigger Hoisting Animation
+        flagpoleWrapper.classList.remove('hoisting');
+        void flagpoleWrapper.offsetWidth; // Force reflow
+        flagpoleWrapper.classList.add('hoisting');
+
+        // Automatically start waving flag & play Anthem
+        if (flagContainer) flagContainer.classList.add('waving');
+        if (typeof startAnthem === 'function' && !isPlaying) {
+            startAnthem();
+        }
+
+        // Spawn falling flower petals
+        triggerPetalShower();
+        showToast('Flag Hoisted with Pride & Honor! Jai Hind! 🇮🇳');
+    });
+}
+
+function triggerPetalShower() {
+    const container = document.getElementById('petals-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+    const petalColors = ['#FF9933', '#138808', '#FFFFFF', '#E11D48', '#F59E0B'];
+
+    for (let i = 0; i < 45; i++) {
+        const petal = document.createElement('div');
+        petal.className = 'petal';
+
+        const size = Math.random() * 14 + 10;
+        petal.style.width = `${size}px`;
+        petal.style.height = `${size * 1.3}px`;
+        petal.style.backgroundColor = petalColors[Math.floor(Math.random() * petalColors.length)];
+        petal.style.left = `${Math.random() * 100}%`;
+        petal.style.animationDuration = `${Math.random() * 2 + 3.5}s`;
+        petal.style.animationDelay = `${Math.random() * 1.5}s`;
+
+        container.appendChild(petal);
+    }
+
+    setTimeout(() => {
+        container.innerHTML = '';
+    }, 6500);
+}
+
+// Feature 2: Flag Code Protocol Modal
+function initFlagCodeModal() {
+    const openBtn = document.getElementById('flagcode-open-btn');
+    const closeBtn = document.getElementById('flagcode-close-btn');
+    const modal = document.getElementById('flagcode-modal');
+
+    if (!openBtn || !modal) return;
+
+    openBtn.addEventListener('click', () => {
+        modal.style.display = 'flex';
+    });
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+    }
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+}
+
+// High-Resolution PNG Flag Exporter
 function initPNGExport() {
     const exportBtn = document.getElementById('export-png-btn');
     if (!exportBtn) return;
@@ -191,7 +270,7 @@ function initPNGExport() {
     });
 }
 
-// Feature 2: National Anthem Audio Synthesizer & Player
+// National Anthem Audio Synthesizer & Player
 let audioCtx = null;
 let isPlaying = false;
 let anthemTimer = null;
