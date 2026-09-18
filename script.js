@@ -5,9 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
     initCopyColor();
     initWaveToggle();
     initHoistCeremony();
+    initDiyaTribute();
     initFlagCodeModal();
     initPNGExport();
     initAnthemPlayer();
+    initAnthemLyrics();
+    initFlagCalculator();
     initSpokesExplorer();
     initShareButton();
     initQuiz();
@@ -74,6 +77,85 @@ function updateThemeIcon(theme) {
     if (icon) {
         icon.textContent = theme === 'dark' ? '☀️' : '🌙';
     }
+}
+
+// Feature 1: Anthem Lyrics & Sing-Along Highlighting
+function initAnthemLyrics() {
+    const toggleBtn = document.getElementById('lyrics-toggle-btn');
+    const lyricsBox = document.getElementById('anthem-lyrics-box');
+    if (!toggleBtn || !lyricsBox) return;
+
+    toggleBtn.addEventListener('click', () => {
+        const isHidden = lyricsBox.style.display === 'none';
+        lyricsBox.style.display = isHidden ? 'block' : 'none';
+        toggleBtn.textContent = isHidden ? '📜 Hide Lyrics' : '📜 Lyrics';
+    });
+}
+
+function updateLyricsHighlight(currentSec) {
+    const lyricsBox = document.getElementById('anthem-lyrics-box');
+    if (!lyricsBox || lyricsBox.style.display === 'none') return;
+
+    const lines = lyricsBox.querySelectorAll('.lyrics-line');
+    let activeLine = null;
+
+    lines.forEach(line => {
+        const start = parseInt(line.getAttribute('data-start') || '0');
+        if (currentSec >= start) {
+            activeLine = line;
+        }
+        line.classList.remove('active');
+    });
+
+    if (activeLine) {
+        activeLine.classList.add('active');
+        activeLine.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+}
+
+// Feature 2: Light Diya & Pay Respects Tribute
+function initDiyaTribute() {
+    const diyaBtn = document.getElementById('diya-btn');
+    const diyaGlow = document.getElementById('diya-glow');
+    if (!diyaBtn || !diyaGlow) return;
+
+    diyaBtn.addEventListener('click', () => {
+        const isVisible = diyaGlow.style.display !== 'none';
+        diyaGlow.style.display = isVisible ? 'none' : 'flex';
+        if (!isVisible) {
+            triggerPetalShower();
+            showToast('Offered Tribute: Brass Diya Lighted at Flag Base! 🪔');
+        } else {
+            showToast('Tribute Diya Extinguished');
+        }
+    });
+}
+
+// Feature 3: Flag Dimensions Calculator
+function initFlagCalculator() {
+    const input = document.getElementById('flag-height-input');
+    const widthVal = document.getElementById('calc-width-val');
+    const bandVal = document.getElementById('calc-band-val');
+    const chakraVal = document.getElementById('calc-chakra-val');
+    const areaVal = document.getElementById('calc-area-val');
+
+    if (!input) return;
+
+    function recalculate() {
+        const h = parseFloat(input.value) || 0;
+        const w = h * 1.5;
+        const b = h / 3;
+        const c = b * 0.75;
+        const area = h * w;
+
+        if (widthVal) widthVal.textContent = `${w.toFixed(1)} cm`;
+        if (bandVal) bandVal.textContent = `${b.toFixed(1)} cm`;
+        if (chakraVal) chakraVal.textContent = `${c.toFixed(1)} cm`;
+        if (areaVal) areaVal.textContent = `${area.toLocaleString()} cm²`;
+    }
+
+    input.addEventListener('input', recalculate);
+    recalculate();
 }
 
 // Copy Color Code
@@ -351,6 +433,7 @@ function initAnthemPlayer() {
         progressSlider.addEventListener('input', (e) => {
             anthemTimeSec = Math.floor((e.target.value / 100) * anthemDurationSec);
             currentTimeText.textContent = formatTime(anthemTimeSec);
+            updateLyricsHighlight(anthemTimeSec);
         });
     }
 }
@@ -379,6 +462,7 @@ function startAnthem() {
         }
         if (currentTimeText) currentTimeText.textContent = formatTime(anthemTimeSec);
         if (progressSlider) progressSlider.value = (anthemTimeSec / anthemDurationSec) * 100;
+        updateLyricsHighlight(anthemTimeSec);
     }, 1000);
 }
 

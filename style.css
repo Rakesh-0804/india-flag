@@ -307,6 +307,57 @@ main {
     transform: scale(1.15);
 }
 
+.btn-sm {
+    background: var(--bg-primary);
+    border: 1px solid var(--bg-card-border);
+    color: var(--text-primary);
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-sm:hover {
+    background: var(--color-saffron);
+    color: #fff;
+    border-color: var(--color-saffron);
+}
+
+/* Anthem Lyrics Accordion Box */
+.anthem-lyrics-box {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px stroke var(--bg-card-border);
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.lyrics-line {
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+    transition: background 0.3s ease;
+    margin-bottom: 0.3rem;
+}
+
+.lyrics-line.active {
+    background: rgba(255, 153, 51, 0.15);
+    border-left: 3px solid var(--color-saffron);
+}
+
+.lyric-penned {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+.lyric-trans {
+    font-size: 0.83rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
 /* Flag Stage & Flagpole Frame */
 .flag-stage {
     display: flex;
@@ -352,6 +403,33 @@ main {
     background: linear-gradient(180deg, #475569 0%, #1E293B 100%);
     border-radius: 4px 4px 0 0;
     margin-bottom: -18px;
+}
+
+/* Virtual Diya Element & Flame Animation */
+.diya-element {
+    position: absolute;
+    bottom: 20px;
+    left: -20px;
+    font-size: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 0.5s ease;
+}
+
+.flame {
+    width: 12px;
+    height: 20px;
+    background: radial-gradient(circle at 50% 80%, #F59E0B, #EF4444, rgba(255,255,255,0));
+    border-radius: 50% 50% 20% 20%;
+    animation: flameFlicker 0.6s infinite alternate ease-in-out;
+    margin-bottom: -6px;
+    filter: drop-shadow(0 0 6px #F59E0B);
+}
+
+@keyframes flameFlicker {
+    0% { transform: scale(1) rotate(-2deg); opacity: 0.9; }
+    100% { transform: scale(1.15) rotate(3deg); opacity: 1; }
 }
 
 .flag-wrapper {
@@ -522,6 +600,69 @@ main {
 .btn-secondary:hover {
     background: var(--bg-card-border);
     transform: translateY(-1px);
+}
+
+/* Flag Calculator Section */
+.calc-section {
+    background: var(--bg-card);
+    border: 1px solid var(--bg-card-border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 3.5rem;
+}
+
+.calc-card {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.calc-input-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.calc-input {
+    width: 140px;
+    padding: 0.6rem 1rem;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--color-saffron);
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+}
+
+.calc-results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.calc-result-item {
+    background: var(--bg-primary);
+    border: 1px solid var(--bg-card-border);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1rem;
+    text-align: center;
+}
+
+.calc-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.4rem;
+}
+
+.calc-val {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--color-navy);
 }
 
 /* Falling Petal Particles Animation */

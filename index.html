@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>National Flag of India | Tiranga Interactive Showcase</title>
-    <meta name="description" content="Explore the National Flag of India (Tiranga). Flag hoisting ceremony, proportions, color specs, Flag Code guidelines, audio player, PNG exporter, and 24 spokes explorer.">
+    <meta name="description" content="Explore the National Flag of India (Tiranga). Flag hoisting ceremony, anthem lyrics, flag size calculator, proportions, color specs, Flag Code guidelines, audio player, PNG exporter, and 24 spokes explorer.">
     <meta name="theme-color" content="#FF9933">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
@@ -22,7 +22,8 @@
             </div>
             <ul class="nav-links">
                 <li><a href="index.html" class="nav-link active">Home & Flag</a></li>
-                <li><a href="#anthem-section" class="nav-link">Anthem Player</a></li>
+                <li><a href="#anthem-section" class="nav-link">Anthem & Lyrics</a></li>
+                <li><a href="#calculator" class="nav-link">Size Calculator</a></li>
                 <li><a href="#colors" class="nav-link">Specifications</a></li>
                 <li><a href="#spokes" class="nav-link">24 Spokes</a></li>
                 <li><button id="flagcode-open-btn" class="nav-link btn-link">Flag Code</button></li>
@@ -66,6 +67,39 @@
                     <input type="range" id="anthem-progress" value="0" min="0" max="100" class="anthem-slider" aria-label="Anthem progress">
                     <span id="anthem-duration">0:52</span>
                     <button id="anthem-mute-btn" class="btn-icon" aria-label="Mute Audio">🔊</button>
+                    <button id="lyrics-toggle-btn" class="btn-sm">📜 Lyrics</button>
+                </div>
+
+                <!-- Anthem Lyrics & Meaning Accordion -->
+                <div id="anthem-lyrics-box" class="anthem-lyrics-box" style="display: none;">
+                    <div class="lyrics-line" data-start="0">
+                        <p class="lyric-penned">Jana-gana-mana-adhinayaka jaya he</p>
+                        <p class="lyric-trans">Thou art the ruler of the minds of all people, dispenser of India's destiny.</p>
+                    </div>
+                    <div class="lyrics-line" data-start="8">
+                        <p class="lyric-penned">Bharata-bhagya-vidhata</p>
+                        <p class="lyric-trans">Thy name rouses the hearts of Punjab, Sind, Gujarat, and Maratha,</p>
+                    </div>
+                    <div class="lyrics-line" data-start="16">
+                        <p class="lyric-penned">Punjaba-Sindhu-Gujarata-Maratha Dravida-Utkala-Banga</p>
+                        <p class="lyric-trans">Of Dravida and Orissa and Bengal; It echoes in the hills of Vindhya and Himalaya,</p>
+                    </div>
+                    <div class="lyrics-line" data-start="26">
+                        <p class="lyric-penned">Vindhya-Himachala-Yamuna-Ganga Uchchala-Jaladhi-taranga</p>
+                        <p class="lyric-trans">Mingles in the music of Yamuna and Ganga and is chanted by the waves of the Sea.</p>
+                    </div>
+                    <div class="lyrics-line" data-start="36">
+                        <p class="lyric-penned">Tava subha name jage, Tava subha asisa mage, Gahe tava jaya gatha</p>
+                        <p class="lyric-trans">They pray for thy blessings and sing thy praise.</p>
+                    </div>
+                    <div class="lyrics-line" data-start="46">
+                        <p class="lyric-penned">Jana-gana-mangala-dayaka jaya he, Bharata-bhagya-vidhata</p>
+                        <p class="lyric-trans">The saving of all people waits in thy hand, thou dispenser of India's destiny.</p>
+                    </div>
+                    <div class="lyrics-line" data-start="50">
+                        <p class="lyric-penned">Jaya he, jaya he, jaya he, Jaya jaya jaya, jaya he!</p>
+                        <p class="lyric-trans">Victory, victory, victory to thee!</p>
+                    </div>
                 </div>
             </div>
             
@@ -75,6 +109,10 @@
                     <div class="flagpole">
                         <div class="flagpole-finial"></div>
                         <div class="flagpole-pole"></div>
+                        <div id="diya-glow" class="diya-element" style="display: none;">
+                            <div class="flame"></div>
+                            <div class="diya-pot">🪔</div>
+                        </div>
                         <div class="flagpole-base"></div>
                     </div>
                     <!-- 3:2 Ratio Aspect Flag Container -->
@@ -91,10 +129,13 @@
                     <button id="hoist-btn" class="btn btn-primary">
                         <span class="icon">🚩</span> Hoist Flag Ceremony
                     </button>
+                    <button id="diya-btn" class="btn btn-accent">
+                        <span class="icon">🪔</span> Pay Respects (Light Diya)
+                    </button>
                     <button id="wave-toggle" class="btn btn-secondary" aria-pressed="false">
                         <span class="icon">🌊</span> Toggle Flag Wave
                     </button>
-                    <button id="export-png-btn" class="btn btn-accent">
+                    <button id="export-png-btn" class="btn btn-secondary">
                         <span class="icon">🖼️</span> Export Flag PNG (HD)
                     </button>
                     <button id="share-btn" class="btn btn-secondary">
@@ -103,6 +144,38 @@
                     <a href="assets/ashoka_chakra.svg" download="ashoka_chakra.svg" class="btn btn-secondary">
                         <span class="icon">📥</span> Download Chakra SVG
                     </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Flag Dimensions Calculator Section -->
+        <section id="calculator" class="calc-section">
+            <h2 class="section-title">Flag Proportions Calculator</h2>
+            <p class="section-desc">Enter any desired flag height below to automatically calculate official Flag Code dimensions.</p>
+
+            <div class="calc-card">
+                <div class="calc-input-group">
+                    <label for="flag-height-input">Flag Height (cm or inches):</label>
+                    <input type="number" id="flag-height-input" value="100" min="10" max="10000" class="calc-input">
+                </div>
+
+                <div class="calc-results-grid">
+                    <div class="calc-result-item">
+                        <span class="calc-label">Required Width (3:2 Ratio)</span>
+                        <span id="calc-width-val" class="calc-val">150 cm</span>
+                    </div>
+                    <div class="calc-result-item">
+                        <span class="calc-label">Each Band Height (1/3rd)</span>
+                        <span id="calc-band-val" class="calc-val">33.3 cm</span>
+                    </div>
+                    <div class="calc-result-item">
+                        <span class="calc-label">Chakra Diameter (~75% Band)</span>
+                        <span id="calc-chakra-val" class="calc-val">25 cm</span>
+                    </div>
+                    <div class="calc-result-item">
+                        <span class="calc-label">Total Flag Area</span>
+                        <span id="calc-area-val" class="calc-val">15,000 cm²</span>
+                    </div>
                 </div>
             </div>
         </section>
