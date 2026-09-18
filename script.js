@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initCopyColor();
     initWaveToggle();
+    initPNGExport();
+    initAnthemPlayer();
     initSpokesExplorer();
     initQuiz();
 });
@@ -79,6 +81,265 @@ function initWaveToggle() {
             ? '<span class="icon">🛑</span> Pause Flag Wave' 
             : '<span class="icon">🌊</span> Toggle Flag Wave';
     });
+}
+
+// Feature 1: High-Resolution PNG Flag Exporter
+function initPNGExport() {
+    const exportBtn = document.getElementById('export-png-btn');
+    if (!exportBtn) return;
+
+    exportBtn.addEventListener('click', () => {
+        const width = 1800;
+        const height = 1200; // 3:2 Ratio Aspect
+
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+
+        // Band 1: Saffron
+        ctx.fillStyle = '#FF9933';
+        ctx.fillRect(0, 0, width, height / 3);
+
+        // Band 2: White
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, height / 3, width, height / 3);
+
+        // Band 3: Green
+        ctx.fillStyle = '#138808';
+        ctx.fillRect(0, (height / 3) * 2, width, height / 3);
+
+        // Center Ashoka Chakra
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const radius = (height / 3) * 0.43; // ~172px
+
+        ctx.strokeStyle = '#000080';
+        ctx.fillStyle = '#000080';
+        ctx.lineWidth = 12;
+
+        // Outer Rim Circle
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Inner Rim Circle
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius * 0.9, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Central Hub
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius * 0.17, 0, Math.PI * 2);
+        ctx.fill();
+
+        // White Pin
+        ctx.fillStyle = '#FFFFFF';
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius * 0.07, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Navy Center Dot
+        ctx.fillStyle = '#000080';
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius * 0.03, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 24 Spokes & Outer Rim Dots
+        for (let i = 0; i < 24; i++) {
+            const angle = (i * 15 * Math.PI) / 180;
+            const innerR = radius * 0.17;
+            const outerR = radius * 0.9;
+
+            // Spoke Polygon (Triangular pointed)
+            const tipX = centerX + outerR * Math.cos(angle);
+            const tipY = centerY + outerR * Math.sin(angle);
+
+            const perpAngle1 = angle + Math.PI / 2;
+            const perpAngle2 = angle - Math.PI / 2;
+
+            const baseWidth = 4.5;
+            const b1X = centerX + innerR * Math.cos(angle) + baseWidth * Math.cos(perpAngle1);
+            const b1Y = centerY + innerR * Math.sin(angle) + baseWidth * Math.sin(perpAngle1);
+            const b2X = centerX + innerR * Math.cos(angle) + baseWidth * Math.cos(perpAngle2);
+            const b2Y = centerY + innerR * Math.sin(angle) + baseWidth * Math.sin(perpAngle2);
+
+            ctx.beginPath();
+            ctx.moveTo(b1X, b1Y);
+            ctx.lineTo(tipX, tipY);
+            ctx.lineTo(b2X, b2Y);
+            ctx.closePath();
+            ctx.fill();
+
+            // Decorative Rim Dot
+            const dotR = radius * 0.95;
+            const dotX = centerX + dotR * Math.cos(angle);
+            const dotY = centerY + dotR * Math.sin(angle);
+            ctx.beginPath();
+            ctx.arc(dotX, dotY, 4, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // Trigger Download
+        const link = document.createElement('a');
+        link.download = 'Tiranga_National_Flag_India.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+
+        showToast('Downloaded High-Resolution PNG Flag! 🇮🇳');
+    });
+}
+
+// Feature 2: National Anthem Audio Synthesizer & Player
+let audioCtx = null;
+let isPlaying = false;
+let anthemTimer = null;
+let anthemTimeSec = 0;
+const anthemDurationSec = 52;
+let isMuted = false;
+
+function initAnthemPlayer() {
+    const playBtn = document.getElementById('anthem-play-btn');
+    const playIcon = document.getElementById('anthem-play-icon');
+    const statusText = document.getElementById('anthem-status-text');
+    const equalizer = document.getElementById('equalizer');
+    const progressSlider = document.getElementById('anthem-progress');
+    const currentTimeText = document.getElementById('anthem-current-time');
+    const durationText = document.getElementById('anthem-duration');
+    const muteBtn = document.getElementById('anthem-mute-btn');
+
+    if (!playBtn) return;
+
+    durationText.textContent = formatTime(anthemDurationSec);
+
+    playBtn.addEventListener('click', () => {
+        if (!isPlaying) {
+            startAnthem();
+        } else {
+            stopAnthem();
+        }
+    });
+
+    if (muteBtn) {
+        muteBtn.addEventListener('click', () => {
+            isMuted = !isMuted;
+            muteBtn.textContent = isMuted ? '🔇' : '🔊';
+            showToast(isMuted ? 'Muted Audio' : 'Unmuted Audio');
+        });
+    }
+
+    if (progressSlider) {
+        progressSlider.addEventListener('input', (e) => {
+            anthemTimeSec = Math.floor((e.target.value / 100) * anthemDurationSec);
+            currentTimeText.textContent = formatTime(anthemTimeSec);
+        });
+    }
+}
+
+function startAnthem() {
+    const playIcon = document.getElementById('anthem-play-icon');
+    const statusText = document.getElementById('anthem-status-text');
+    const equalizer = document.getElementById('equalizer');
+    const progressSlider = document.getElementById('anthem-progress');
+    const currentTimeText = document.getElementById('anthem-current-time');
+
+    isPlaying = true;
+    if (playIcon) playIcon.textContent = '⏸';
+    if (statusText) statusText.textContent = 'Playing National Anthem — Jana Gana Mana';
+    if (equalizer) equalizer.classList.add('playing');
+
+    // Synthesize Jana Gana Mana tune notes via Web Audio API
+    playSynthesizedAnthemNotes();
+
+    anthemTimer = setInterval(() => {
+        if (!isPlaying) return;
+        anthemTimeSec++;
+        if (anthemTimeSec > anthemDurationSec) {
+            stopAnthem();
+            return;
+        }
+        if (currentTimeText) currentTimeText.textContent = formatTime(anthemTimeSec);
+        if (progressSlider) progressSlider.value = (anthemTimeSec / anthemDurationSec) * 100;
+    }, 1000);
+}
+
+function stopAnthem() {
+    isPlaying = false;
+    if (anthemTimer) clearInterval(anthemTimer);
+    const playIcon = document.getElementById('anthem-play-icon');
+    const statusText = document.getElementById('anthem-status-text');
+    const equalizer = document.getElementById('equalizer');
+
+    if (playIcon) playIcon.textContent = '▶';
+    if (statusText) statusText.textContent = 'Click play to listen to the National Anthem tune';
+    if (equalizer) equalizer.classList.remove('playing');
+
+    if (audioCtx) {
+        audioCtx.close().catch(() => {});
+        audioCtx = null;
+    }
+}
+
+function playSynthesizedAnthemNotes() {
+    try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+
+        // Frequency mapping for Jana Gana Mana melody (Key of C Major)
+        const notes = [
+            { note: 261.63, duration: 0.4 }, // C4 - Ja
+            { note: 293.66, duration: 0.4 }, // D4 - na
+            { note: 329.63, duration: 0.4 }, // E4 - Ga
+            { note: 329.63, duration: 0.4 }, // E4 - na
+            { note: 329.63, duration: 0.4 }, // E4 - Ma
+            { note: 329.63, duration: 0.4 }, // E4 - na
+            { note: 329.63, duration: 0.4 }, // E4 - Ad
+            { note: 329.63, duration: 0.4 }, // E4 - hi
+            { note: 329.63, duration: 0.4 }, // E4 - na
+            { note: 329.63, duration: 0.4 }, // E4 - ya
+            { note: 329.63, duration: 0.6 }, // E4 - ka
+            { note: 293.66, duration: 0.4 }, // D4 - Jay
+            { note: 329.63, duration: 0.4 }, // E4 - a
+            { note: 349.23, duration: 0.8 }, // F4 - He
+            { note: 329.63, duration: 0.4 }, // E4 - Bha
+            { note: 329.63, duration: 0.4 }, // E4 - rat
+            { note: 293.66, duration: 0.4 }, // D4 - Bha
+            { note: 293.66, duration: 0.4 }, // D4 - gya
+            { note: 293.66, duration: 0.4 }, // D4 - Vi
+            { note: 246.94, duration: 0.4 }, // B3 - dha
+            { note: 293.66, duration: 0.4 }, // D4 - ta
+            { note: 261.63, duration: 0.8 }  // C4 - ...
+        ];
+
+        let now = audioCtx.currentTime;
+        notes.forEach(n => {
+            if (isMuted) return;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(n.note, now);
+
+            gain.gain.setValueAtTime(0.15, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + n.duration - 0.05);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start(now);
+            osc.stop(now + n.duration);
+            now += n.duration;
+        });
+    } catch (e) {
+        console.log('Audio Context Error:', e);
+    }
+}
+
+function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
 }
 
 // 24 Spokes Virtue Explorer Data

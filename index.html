@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>National Flag of India | Tiranga Interactive Showcase</title>
-    <meta name="description" content="Explore the National Flag of India (Tiranga). Proportions, color specs, history of Ashoka Chakra, and interactive 24 spokes explorer.">
+    <meta name="description" content="Explore the National Flag of India (Tiranga). Proportions, color specs, history of Ashoka Chakra, National Anthem audio player, PNG exporter, and 24 spokes explorer.">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg+xml" href="assets/ashoka_chakra.svg">
 </head>
@@ -20,6 +20,7 @@
             </div>
             <ul class="nav-links">
                 <li><a href="index.html" class="nav-link active">Home & Flag</a></li>
+                <li><a href="#anthem-section" class="nav-link">Anthem Player</a></li>
                 <li><a href="#colors" class="nav-link">Specifications</a></li>
                 <li><a href="#spokes" class="nav-link">24 Spokes</a></li>
                 <li><a href="fun.html" class="nav-link">Heritage & Quiz</a></li>
@@ -38,6 +39,32 @@
         <section class="hero-section">
             <h1 class="hero-title">The National Flag of India</h1>
             <p class="hero-subtitle">Symbol of pride, courage, peace, and eternal progress. Explore the official specifications, colors, and 24 principles of Dharma.</p>
+
+            <!-- National Anthem Player Widget -->
+            <div id="anthem-section" class="anthem-card">
+                <div class="anthem-info">
+                    <button id="anthem-play-btn" class="anthem-play-btn" aria-label="Play National Anthem">
+                        <span id="anthem-play-icon">▶</span>
+                    </button>
+                    <div class="anthem-text">
+                        <h3>National Anthem — Jana Gana Mana 🇮🇳</h3>
+                        <p id="anthem-status-text">Click play to listen to the National Anthem tune</p>
+                    </div>
+                    <div id="equalizer" class="equalizer">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
+                </div>
+                <div class="anthem-progress-wrapper">
+                    <span id="anthem-current-time">0:00</span>
+                    <input type="range" id="anthem-progress" value="0" min="0" max="100" class="anthem-slider" aria-label="Anthem progress">
+                    <span id="anthem-duration">0:52</span>
+                    <button id="anthem-mute-btn" class="btn-icon" aria-label="Mute Audio">🔊</button>
+                </div>
+            </div>
             
             <div class="flag-stage">
                 <!-- 3:2 Ratio Aspect Flag Container -->
@@ -52,6 +79,9 @@
                 <div class="flag-controls">
                     <button id="wave-toggle" class="btn btn-primary" aria-pressed="false">
                         <span class="icon">🌊</span> Toggle Flag Wave
+                    </button>
+                    <button id="export-png-btn" class="btn btn-accent">
+                        <span class="icon">🖼️</span> Export Flag PNG (HD)
                     </button>
                     <a href="assets/ashoka_chakra.svg" download="ashoka_chakra.svg" class="btn btn-secondary">
                         <span class="icon">📥</span> Download Chakra SVG

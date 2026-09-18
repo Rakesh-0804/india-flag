@@ -5,7 +5,7 @@
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
-An interactive, responsive, and modern web application dedicated to the **National Flag of India (Tiranga)**. Built with HTML5, CSS3 Custom Properties, Vector SVG graphics, and vanilla JavaScript.
+An interactive, responsive, and modern web application dedicated to the **National Flag of India (Tiranga)**. Built with HTML5, CSS3 Custom Properties, Canvas API, Web Audio API, Vector SVG graphics, and vanilla JavaScript.
 
 ---
 
@@ -17,6 +17,8 @@ An interactive, responsive, and modern web application dedicated to the **Nation
   - **White (`#FFFFFF`)**: Peace, truth, and purity.
   - **India Green (`#138808`)**: Faith, prosperity, and chivalry.
   - **Navy Blue (`#000080`)**: Universal truth and eternal progress.
+- 🎵 **National Anthem Audio Player**: Integrated Web Audio API synthesized audio player for *Jana Gana Mana* with play/pause controls, progress bar, mute button, and animated equalizer bars.
+- 🖼️ **High-Resolution PNG Flag Exporter**: One-click export that generates a 1800×1200 HD PNG image of the Indian Flag with crisp Ashoka Chakra details.
 - ⚙️ **Vector Ashoka Chakra**: High-resolution, scalable SVG with 24 precise spokes.
 - 🌊 **Realistic Waving Flag Animation**: Toggleable 3D perspective waving cloth effect powered by CSS keyframes.
 - 🎡 **24-Spoke Virtue Explorer**: Interactive wheel explorer showcasing the 24 principles of Dharma represented by the Ashoka Chakra.
@@ -34,10 +36,10 @@ india-flag-main/
 │   ├── ashoka_chakra.svg   # Vector graphic of the 24-spoke Ashoka Chakra
 │   ├── chakara.jpeg        # Original image asset
 │   └── comdey.webp         # Heritage media asset
-├── index.html              # Main Flag Portal & Specifications Page
+├── index.html              # Main Flag Portal, Anthem Player & Specifications Page
 ├── fun.html                # Heritage, History & National Knowledge Quiz Page
-├── style.css               # Modern responsive CSS design system & animations
-├── script.js               # Theme, waving flag, color copying & quiz logic
+├── style.css               # Modern responsive CSS design system, audio card & animations
+├── script.js               # Theme, waving flag, PNG export, Anthem synthesizer & quiz logic
 ├── .gitignore              # Git ignore rules
 └── README.md               # Documentation
 ```
@@ -48,30 +50,16 @@ india-flag-main/
 
 1. **Clone or Download the Repository**:
    ```bash
-   git clone https://github.com/<your-username>/india-flag.git
+   git clone https://github.com/Rakesh-0804/india-flag.git
    cd india-flag
    ```
 
 2. **Open in Browser**:
-   - Simply open `index.html` in your favorite modern browser (Chrome, Firefox, Edge, Safari).
-   - Alternatively, serve with VS Code Live Server or Python HTTP server:
+   - Open `index.html` in any modern web browser (Chrome, Firefox, Edge, Safari).
+   - Or serve using Python HTTP server:
      ```bash
      python -m http.server 8000
      ```
-
----
-
-## 📌 Pushing to GitHub
-
-To push this repository to your GitHub account:
-
-1. Create a new repository on [GitHub](https://github.com/new) named `india-flag`.
-2. Link your remote repository and push:
-   ```bash
-   git remote add origin https://github.com/<your-username>/india-flag.git
-   git branch -M main
-   git push -u origin main
-   ```
 
 ---
 
