@@ -3,14 +3,17 @@
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![PWA Ready](https://img.shields.io/badge/PWA-Ready-5A0FC8?style=for-the-badge&logo=pwa&logoColor=white)](manifest.json)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
-An interactive, responsive, and modern web application dedicated to the **National Flag of India (Tiranga)**. Built with HTML5, CSS3 Custom Properties, Canvas API, Web Audio API, Vector SVG graphics, and vanilla JavaScript.
+An interactive, responsive, and modern web application dedicated to the **National Flag of India (Tiranga)**. Built with HTML5, CSS3 Custom Properties, Progressive Web App (PWA) Offline Service Worker, Canvas API, Web Audio API, Vector SVG graphics, and vanilla JavaScript.
 
 ---
 
 ## ✨ Features
 
+- 📱 **Progressive Web App (PWA) & Offline Mode**: Installable on Android, iOS, Windows, and Mac with offline caching via `sw.js` and `manifest.json`.
+- 🔗 **Web Share API**: One-click sharing of portal link and details across native social share sheets or instant clipboard copying.
 - 🚩 **Flag Hoisting Ceremony**: Interactive flag hoisting experience complete with a metallic flagpole, rising flag animation, National Anthem playback, and celebratory falling marigold & rose flower petal particles.
 - 📜 **Flag Code Protocols Modal**: Quick reference guide on display rules, Flag Code of India 2002 amendments, and dignified disposal protocols.
 - 🇮🇳 **Official Flag Proportions**: Rendered with exact 3:2 width-to-height aspect ratio and equal horizontal tricolor bands.
@@ -38,10 +41,12 @@ india-flag-main/
 │   ├── ashoka_chakra.svg   # Vector graphic of the 24-spoke Ashoka Chakra
 │   ├── chakara.jpeg        # Original image asset
 │   └── comdey.webp         # Heritage media asset
-├── index.html              # Main Flag Portal, Anthem Player, Flag Hoisting & Flag Code Modal
+├── index.html              # Main Flag Portal, Anthem Player, Flag Hoisting, PWA & Flag Code Modal
 ├── fun.html                # Heritage, History & National Knowledge Quiz Page
 ├── style.css               # Modern responsive CSS design system, flagpole & modal styles
-├── script.js               # Theme, flag hoisting, flower petals, PNG export, Anthem & quiz logic
+├── script.js               # PWA SW registration, Web Share API, theme, hoisting & quiz logic
+├── manifest.json           # Web App Manifest for PWA installation
+├── sw.js                  # Service Worker script for offline caching
 ├── .gitignore              # Git ignore rules
 └── README.md               # Documentation
 ```

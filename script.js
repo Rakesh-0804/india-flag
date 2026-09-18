@@ -9,8 +9,47 @@ document.addEventListener('DOMContentLoaded', () => {
     initPNGExport();
     initAnthemPlayer();
     initSpokesExplorer();
+    initShareButton();
     initQuiz();
+    registerServiceWorker();
 });
+
+// PWA Service Worker Registration
+function registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js').then((reg) => {
+                console.log('Tiranga Portal Service Worker registered:', reg.scope);
+            }).catch((err) => {
+                console.log('Service Worker registration failed:', err);
+            });
+        });
+    }
+}
+
+// Web Share API Handler
+function initShareButton() {
+    const shareBtn = document.getElementById('share-btn');
+    if (!shareBtn) return;
+
+    shareBtn.addEventListener('click', () => {
+        const shareData = {
+            title: 'Tiranga — National Flag of India Portal',
+            text: 'Explore the official proportions, 24 spokes of Ashoka Chakra, Flag Hoisting ceremony, and National Anthem tune!',
+            url: window.location.href
+        };
+
+        if (navigator.share) {
+            navigator.share(shareData).catch(() => {});
+        } else {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                showToast('Copied Portal Link to Clipboard! 🇮🇳');
+            }).catch(() => {
+                showToast('Share Link: ' + window.location.href);
+            });
+        }
+    });
+}
 
 // Theme Management
 function initTheme() {
@@ -85,7 +124,7 @@ function initWaveToggle() {
     });
 }
 
-// Feature 1: Interactive Flag Hoisting Ceremony & Celebratory Flower Petals
+// Interactive Flag Hoisting Ceremony & Celebratory Flower Petals
 function initHoistCeremony() {
     const hoistBtn = document.getElementById('hoist-btn');
     const flagpoleWrapper = document.getElementById('flagpole-wrapper');
@@ -137,7 +176,7 @@ function triggerPetalShower() {
     }, 6500);
 }
 
-// Feature 2: Flag Code Protocol Modal
+// Flag Code Protocol Modal
 function initFlagCodeModal() {
     const openBtn = document.getElementById('flagcode-open-btn');
     const closeBtn = document.getElementById('flagcode-close-btn');
