@@ -12,6 +12,10 @@ An interactive, responsive, and modern web application dedicated to the **Nation
 
 ## ✨ Features
 
+- 💌 **Patriotic Greeting Card Creator**: Personalize greeting messages with inspiring quotes from freedom fighters and download custom high-res Patriotic Greeting Cards (PNG).
+- 📜 **National Anthem Lyrics & Sing-Along**: Line-by-line Bengali transliterated lyrics and English translations synchronized with the audio tune.
+- 🪔 **Pay Respects (Diya Lighting)**: Virtual brass oil lamp lighting with flickering flame animation and celebratory flower petal shower.
+- 📐 **Flag Dimensions Calculator**: Interactive tool to calculate official Flag Code proportions for any custom flag height.
 - 📱 **Progressive Web App (PWA) & Offline Mode**: Installable on Android, iOS, Windows, and Mac with offline caching via `sw.js` and `manifest.json`.
 - 🔗 **Web Share API**: One-click sharing of portal link and details across native social share sheets or instant clipboard copying.
 - 🚩 **Flag Hoisting Ceremony**: Interactive flag hoisting experience complete with a metallic flagpole, rising flag animation, National Anthem playback, and celebratory falling marigold & rose flower petal particles.
@@ -41,10 +45,10 @@ india-flag-main/
 │   ├── ashoka_chakra.svg   # Vector graphic of the 24-spoke Ashoka Chakra
 │   ├── chakara.jpeg        # Original image asset
 │   └── comdey.webp         # Heritage media asset
-├── index.html              # Main Flag Portal, Anthem Player, Flag Hoisting, PWA & Flag Code Modal
+├── index.html              # Main Flag Portal, Anthem Player, Greeting Card Modal & Size Calculator
 ├── fun.html                # Heritage, History & National Knowledge Quiz Page
-├── style.css               # Modern responsive CSS design system, flagpole & modal styles
-├── script.js               # PWA SW registration, Web Share API, theme, hoisting & quiz logic
+├── style.css               # Modern responsive CSS design system, card modal & animations
+├── script.js               # Greeting card exporter, PWA SW registration, theme & hoisting logic
 ├── manifest.json           # Web App Manifest for PWA installation
 ├── sw.js                  # Service Worker script for offline caching
 ├── .gitignore              # Git ignore rules

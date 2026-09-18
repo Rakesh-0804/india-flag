@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initHoistCeremony();
     initDiyaTribute();
     initFlagCodeModal();
+    initQuoteCardCreator();
     initPNGExport();
     initAnthemPlayer();
     initAnthemLyrics();
@@ -16,6 +17,167 @@ document.addEventListener('DOMContentLoaded', () => {
     initQuiz();
     registerServiceWorker();
 });
+
+// Iconic Patriotic Quotes
+const patrioticQuotes = [
+    { quote: "Give me blood, and I shall give you freedom!", author: "Netaji Subhash Chandra Bose" },
+    { quote: "Satyameva Jayate — Truth Alone Triumphs.", author: "Mundaka Upanishad / National Motto" },
+    { quote: "Where the mind is without fear and the head is held high...", author: "Rabindranath Tagore" },
+    { quote: "They may kill me, but they cannot kill my ideas.", author: "Bhagat Singh" },
+    { quote: "A country's greatness lies in its undying ideals of love and sacrifice.", author: "Sarojini Naidu" },
+    { quote: "You must be the change you wish to see in the world.", author: "Mahatma Gandhi" },
+    { quote: "A flag is a necessity for all nations. Millions have died for it.", author: "Pingali Venkayya" },
+    { quote: "Dream, dream, dream. Dreams transform into thoughts and thoughts result in action.", author: "Dr. A. P. J. Abdul Kalam" }
+];
+
+let currentQuoteIdx = 0;
+
+// Feature: Patriotic Greeting Card Creator
+function initQuoteCardCreator() {
+    const openBtn = document.getElementById('quote-open-btn');
+    const closeBtn = document.getElementById('quote-close-btn');
+    const modal = document.getElementById('quote-modal');
+    const nextBtn = document.getElementById('next-quote-btn');
+    const exportBtn = document.getElementById('export-card-btn');
+    const recipientInput = document.getElementById('custom-recipient-input');
+
+    const quoteDisplay = document.getElementById('quote-text-display');
+    const authorDisplay = document.getElementById('quote-author-display');
+    const recipientDisplay = document.getElementById('quote-recipient-display');
+
+    if (!openBtn || !modal) return;
+
+    openBtn.addEventListener('click', () => {
+        modal.style.display = 'flex';
+        updateQuoteCardDisplay();
+    });
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+    }
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.style.display = 'none';
+    });
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            currentQuoteIdx = (currentQuoteIdx + 1) % patrioticQuotes.length;
+            updateQuoteCardDisplay();
+        });
+    }
+
+    if (recipientInput && recipientDisplay) {
+        recipientInput.addEventListener('input', (e) => {
+            const val = e.target.value.trim();
+            recipientDisplay.textContent = val ? `Greetings for ${val}! Jai Hind! 🇮🇳` : 'Warm Patriotic Wishes & Jai Hind! 🇮🇳';
+        });
+    }
+
+    if (exportBtn) {
+        exportBtn.addEventListener('click', exportGreetingCardPNG);
+    }
+}
+
+function updateQuoteCardDisplay() {
+    const q = patrioticQuotes[currentQuoteIdx];
+    const quoteDisplay = document.getElementById('quote-text-display');
+    const authorDisplay = document.getElementById('quote-author-display');
+
+    if (quoteDisplay) quoteDisplay.textContent = `"${q.quote}"`;
+    if (authorDisplay) authorDisplay.textContent = `— ${q.author}`;
+}
+
+function exportGreetingCardPNG() {
+    const q = patrioticQuotes[currentQuoteIdx];
+    const recipientInput = document.getElementById('custom-recipient-input');
+    const recipientName = recipientInput && recipientInput.value.trim() ? recipientInput.value.trim() : 'Friends & Family';
+
+    const width = 1200;
+    const height = 700;
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext('2d');
+
+    // Background Gradient
+    const bgGrad = ctx.createLinearGradient(0, 0, width, height);
+    bgGrad.addColorStop(0, '#FFFFFF');
+    bgGrad.addColorStop(1, '#F8FAFC');
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, 0, width, height);
+
+    // Tricolor Top Accent Banner
+    ctx.fillStyle = '#FF9933';
+    ctx.fillRect(0, 0, width, 18);
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(0, 18, width, 18);
+    ctx.fillStyle = '#138808';
+    ctx.fillRect(0, 36, width, 18);
+
+    // Outer Border Frame
+    ctx.strokeStyle = '#000080';
+    ctx.lineWidth = 4;
+    ctx.strokeRect(20, 20, width - 40, height - 40);
+
+    // Header Badge
+    ctx.fillStyle = '#000080';
+    ctx.fillRect(width / 2 - 120, 80, 240, 36);
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = 'bold 16px "Segoe UI", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('INSPIRING PATRIOTIC QUOTE', width / 2, 104);
+
+    // Quote Text
+    ctx.fillStyle = '#0F172A';
+    ctx.font = 'italic bold 28px "Segoe UI", sans-serif';
+    
+    // Wrap quote text into lines
+    const words = q.quote.split(' ');
+    let line = '';
+    let y = 220;
+    for (let n = 0; n < words.length; n++) {
+        let testLine = line + words[n] + ' ';
+        let metrics = ctx.measureText(testLine);
+        if (metrics.width > 900 && n > 0) {
+            ctx.fillText(line, width / 2, y);
+            line = words[n] + ' ';
+            y += 42;
+        } else {
+            line = testLine;
+        }
+    }
+    ctx.fillText(line, width / 2, y);
+
+    // Author
+    y += 50;
+    ctx.fillStyle = '#E6801A';
+    ctx.font = 'bold 22px "Segoe UI", sans-serif';
+    ctx.fillText(`— ${q.author}`, width / 2, y);
+
+    // Footer Message
+    y += 100;
+    ctx.strokeStyle = '#CBD5E1';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(200, y - 30);
+    ctx.lineTo(1000, y - 30);
+    ctx.stroke();
+
+    ctx.fillStyle = '#138808';
+    ctx.font = 'bold 24px "Segoe UI", sans-serif';
+    ctx.fillText(`Greetings for ${recipientName}! Jai Hind! 🇮🇳`, width / 2, y);
+
+    // Download PNG
+    const link = document.createElement('a');
+    link.download = `Patriotic_Greeting_Card_${recipientName.replace(/\s+/g, '_')}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+
+    showToast('Downloaded Customized Patriotic Greeting Card! 💌🇮🇳');
+}
 
 // PWA Service Worker Registration
 function registerServiceWorker() {
@@ -79,7 +241,7 @@ function updateThemeIcon(theme) {
     }
 }
 
-// Feature 1: Anthem Lyrics & Sing-Along Highlighting
+// Anthem Lyrics & Sing-Along Highlighting
 function initAnthemLyrics() {
     const toggleBtn = document.getElementById('lyrics-toggle-btn');
     const lyricsBox = document.getElementById('anthem-lyrics-box');
@@ -113,7 +275,7 @@ function updateLyricsHighlight(currentSec) {
     }
 }
 
-// Feature 2: Light Diya & Pay Respects Tribute
+// Light Diya & Pay Respects Tribute
 function initDiyaTribute() {
     const diyaBtn = document.getElementById('diya-btn');
     const diyaGlow = document.getElementById('diya-glow');
@@ -131,7 +293,7 @@ function initDiyaTribute() {
     });
 }
 
-// Feature 3: Flag Dimensions Calculator
+// Flag Dimensions Calculator
 function initFlagCalculator() {
     const input = document.getElementById('flag-height-input');
     const widthVal = document.getElementById('calc-width-val');

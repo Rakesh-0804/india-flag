@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>National Flag of India | Tiranga Interactive Showcase</title>
-    <meta name="description" content="Explore the National Flag of India (Tiranga). Flag hoisting ceremony, anthem lyrics, flag size calculator, proportions, color specs, Flag Code guidelines, audio player, PNG exporter, and 24 spokes explorer.">
+    <meta name="description" content="Explore the National Flag of India (Tiranga). Flag hoisting ceremony, anthem lyrics, greeting card generator, size calculator, proportions, color specs, Flag Code guidelines, audio player, PNG exporter, and 24 spokes explorer.">
     <meta name="theme-color" content="#FF9933">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
@@ -129,6 +129,9 @@
                     <button id="hoist-btn" class="btn btn-primary">
                         <span class="icon">🚩</span> Hoist Flag Ceremony
                     </button>
+                    <button id="quote-open-btn" class="btn btn-primary">
+                        <span class="icon">💌</span> Create Greeting Card
+                    </button>
                     <button id="diya-btn" class="btn btn-accent">
                         <span class="icon">🪔</span> Pay Respects (Light Diya)
                     </button>
@@ -249,6 +252,44 @@
             </div>
         </section>
     </main>
+
+    <!-- Patriotic Greeting Card Creator Modal -->
+    <div id="quote-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>Patriotic Greeting Card Creator 💌🇮🇳</h2>
+                <button id="quote-close-btn" class="modal-close-btn" aria-label="Close Modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="greeting-card-preview" class="greeting-card-preview">
+                    <div class="card-tricolor-bar"></div>
+                    <div class="card-inner">
+                        <span class="card-badge">INSPIRING QUOTE</span>
+                        <blockquote id="quote-text-display">"Give me blood, and I shall give you freedom!"</blockquote>
+                        <cite id="quote-author-display">— Netaji Subhash Chandra Bose</cite>
+                        <div class="card-footer-msg">
+                            <span id="quote-recipient-display">Warm Patriotic Wishes & Jai Hind! 🇮🇳</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-controls-form">
+                    <div class="form-group">
+                        <label for="custom-recipient-input">Personalize Greeting Message:</label>
+                        <input type="text" id="custom-recipient-input" placeholder="e.g. To My Family & Friends" class="form-input">
+                    </div>
+                    <div class="form-actions">
+                        <button id="next-quote-btn" class="btn btn-secondary">
+                            <span class="icon">🔄</span> Next Quote
+                        </button>
+                        <button id="export-card-btn" class="btn btn-primary">
+                            <span class="icon">📥</span> Export Card PNG
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Flag Code Guidelines Modal -->
     <div id="flagcode-modal" class="modal-overlay" style="display: none;">

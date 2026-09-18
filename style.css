@@ -329,7 +329,7 @@ main {
 .anthem-lyrics-box {
     margin-top: 1.25rem;
     padding-top: 1rem;
-    border-top: 1px stroke var(--bg-card-border);
+    border-top: 1px solid var(--bg-card-border);
     max-height: 240px;
     overflow-y: auto;
 }
@@ -356,6 +356,93 @@ main {
     font-size: 0.83rem;
     color: var(--text-secondary);
     font-style: italic;
+}
+
+/* Greeting Card Creator Preview */
+.greeting-card-preview {
+    background: var(--bg-primary);
+    border: 2px solid var(--bg-card-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-md);
+}
+
+.card-tricolor-bar {
+    height: 8px;
+    background: linear-gradient(90deg, var(--color-saffron) 0%, var(--color-saffron) 33.3%, var(--color-white) 33.3%, var(--color-white) 66.6%, var(--color-green) 66.6%, var(--color-green) 100%);
+}
+
+.card-inner {
+    padding: 2rem;
+    text-align: center;
+}
+
+.card-badge {
+    background: var(--color-navy);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-full);
+    letter-spacing: 0.08em;
+}
+
+.card-inner blockquote {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 1.25rem 0 0.5rem 0;
+    font-style: italic;
+}
+
+.card-inner cite {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--color-saffron-dark);
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+}
+
+.card-footer-msg {
+    border-top: 1px dashed var(--bg-card-border);
+    padding-top: 0.85rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-green);
+}
+
+.card-controls-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    text-align: left;
+}
+
+.form-group label {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.form-input {
+    padding: 0.65rem 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--bg-card-border);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
 }
 
 /* Flag Stage & Flagpole Frame */
